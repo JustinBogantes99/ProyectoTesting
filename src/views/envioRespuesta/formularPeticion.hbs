@@ -1,0 +1,109 @@
+<section id="contact" class="mt-5">
+    <div class="container">
+        <div class="section-header">
+            <h3 class="section-title">Formulación de Peticiones</h3>
+            <p class="section-description">Envíe una petición a un usuario llenando los campos que se le solicitan a continuación. Use el filtro para seleccionar usuarios.</p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9 col-md-8">
+                <div class="form">
+
+                    {{> filtroUsuario}}
+                    
+                    <form id="signupForm" action="/inicio/agregar_peticion" method="POST" enctype="multipart/form-data">
+                        <br>
+                        <h5 class="text-center">Cuerpo de la Petición</h5>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="idAsunto" class="col-lg-2 col-form-label text-right">Asunto:</label>
+                            <div class="col-lg-10">
+                                <input id="idAsunto" type="text" class="form-control" name="asunto" placeholder="Asunto"
+                                    autocomplete="off" required/>
+                                <div class="valid-feedback">
+                                    Asunto.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese un nombre de asunto.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="destinatario" class="col-lg-2 col-form-label text-right">Usuario:</label>
+                            <div class="col-lg-10">
+                                <input id="destinatario" type="text" class="form-control my-auto readonly"
+                                    name="destinatarioCorreo" placeholder="Seleccione un usuario del Filtro de Usuarios"
+                                    autocomplete="off" required/>
+                                <div class="valid-feedback">
+                                    Usuario.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Seleccione un usuario de la sección <i>Filtro para seleccionar usuario</i>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="idDescripcion" class="col-lg-2 col-form-label text-right">Descripción:</label>
+                            <div class="col-lg-10">
+                                <textarea name="descripcion" id="idDescripcion" class="form-control textBI"
+                                    placeholder="Descripción de la Petición" required></textarea>
+                                <div class="valid-feedback">
+                                    Descripción.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-lg-2 col-form-label text-right">Fecha Límite:</label>
+                            <div class="col-lg-10">
+                                <input id="date" name="fechaLimite" type="text"
+                                    class="datepicker-here form-control readonly" placeholder="Fecha Límite"
+                                    value="{{fecha_limite}}" data-language='en' data-date-format="yyyy-mm-dd"
+                                    autocomplete="off" min="{{fechaActual}}" required/>
+                                <div class="valid-feedback">
+                                    Fecha Límite.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una fecha límite.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="idPrioridad" class="col-lg-2 col-form-label text-right">Prioridad:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="idPrioridad" name="prioridad" required>
+                                    <option> Alto </option>
+                                    <option> Medio </option>
+                                    <option> Bajo </option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Prioridad.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una prioridad.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h5 class="text-center">Adjuntar Archivos (Opcional)</h5>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="file" class="col-lg-2 col-form-label text-right">Archivos Adjuntos:</label>
+                            <div class="col-lg-10 my-auto">
+                                <input id="file" name="file" type="file" class="form-control" multiple>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

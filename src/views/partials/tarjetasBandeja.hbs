@@ -1,0 +1,156 @@
+<div class="row justify-content-center">
+    <div class="col-lg-10 align-self-center">
+        {{#if comunicacion}}
+        <div class="container">
+            {{#each comunicacion}}
+            <a
+                href="/inicio/{{#if_equal tipo "Peticion"}}mostrar_peticion{{else}}{{#if_equal tipo "Respuesta"}}mostrar_respuesta{{/if_equal}}{{/if_equal}}/{{_id}}">
+                <div class="card border border-secondary rounded-0">
+                    <div class="card-body pb-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-6">
+                                <p class="mb-0 h5">{{asunto}}</p>
+                            </div>
+                            <div class="col-4">
+                                {{#if_equal tipo "Peticion"}}
+                                <p class="mb-0 hour"><strong>Consecutivo: </strong>{{codigo}}</p>
+                                {{/if_equal}}
+                            </div>
+                            <div class="col-2">
+                                <p class="mb-0 hour">{{fechaInicio}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-body pt-0">
+                        <div class="row ml-1">
+                            <div class="col-lg-5">
+                                <h6 class="font-weight-bold">
+                                    <strong>{{dePara}}</strong> {{nombrePersona}}
+                                </h6>
+                            </div>
+                            {{#if tipoRespuesta}}
+                            <div class="col-lg-5">
+                                {{{tipoRespuesta}}}
+                            </div>
+                            {{#if remitenteRechazo}}
+                            <div class="col-lg-2">
+                                <object>
+                                    <a href="/inicio/modificar_respuesta/{{_id}}" class="btn"
+                                        style="background-color: transparent;">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </object>
+                            </div>
+                            {{/if}}
+                            {{/if}}
+                            {{#if_equal estado "Activo"}}
+                            <div class="col-lg-1">
+                                <i class="fa fa-spinner" style="color:blue;" aria-hidden="true"></i>
+                            </div>
+                            {{/if_equal}}
+                            {{#if_equal estado "Inactivo"}}
+                            <div class="col-lg-1">
+                                <i class="fa fa-check" style="color:springgreen;" aria-hidden="true"></i>
+                            </div>
+                            {{/if_equal}}
+                            <!-- -->
+                            <div class="col-lg-2">
+                                {{#if_equal tipo "Peticion"}}
+                                <p class="mb-0"><strong>Límite: </strong>{{Limite}}</p>
+                                {{/if_equal}}
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="badge badge-pill badge-danger font-weight-normal">{{prioridad}}</span>
+                            </div>
+
+                            {{#if privilegios}}
+                            <!-- Si tiene privilegios -->
+                            <!-- Boton para delegar -->
+
+                            {{#if_equal tipo "Peticion"}}
+                            {{#if_equal ../bandeja "Entrada Peticion"}}
+                            <!--Bandeja peticiones de entrada-->
+                            {{#if_equal estado "Activo"}}
+                            <div class="col-1 mr-auto">
+                                <object>
+                                    <a href="/inicio/delegar_peticion/{{_id}}" class="btn"
+                                        style="background-color: transparent;"><i class="fa fa-users"
+                                            aria-hidden="true"></i></a>
+                                </object>
+                            </div>
+                            {{/if_equal}}
+                            {{/if_equal}}
+
+                            {{#if_equal ../bandeja "Inicio"}}
+                            <!--Bandeja Inicio-->
+                            {{#if_equal estado "Activo"}}
+                            <div class="col-1 mr-auto">
+                                <object>
+                                    <a href="/inicio/delegar_peticion/{{_id}}" class="btn"
+                                        style="background-color: transparent;"><i class="fa fa-users"
+                                            aria-hidden="true"></i></a>
+                                </object>
+                            </div>
+                            {{/if_equal}}
+                            {{/if_equal}}
+
+                            {{#if (isdefined responder)}}
+                            {{#if responder}}
+                            <div class="col-1 mr-auto">
+                                <object>
+                                    <a href="/inicio/responder_peticion/{{_id}}" class="btn"
+                                        style="background-color: transparent;"><i class="fa fa-reply"
+                                            aria-hidden="true"></i></a>
+                                </object>
+                            </div>
+                            {{/if}}
+                            {{/if}}
+                            {{/if_equal}}
+
+                            {{#if_equal ../bandeja "Salida Peticion"}}
+                            <div class="col-1 mr-auto">
+                                <object>
+                                    <a href="/inicio/modificar_peticion/{{_id}}" class="btn"
+                                        style="background-color: transparent;">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </object>
+                            </div>
+                            {{/if_equal}}
+                            {{/if}}
+                            <!--Cerrar privilegios -->
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="jumbotron" style="background:transparent !important">
+            {{#if_equal bandeja "Entrada Peticion"}}
+            <h3 class="text-center my-auto">No se han encontrado peticiones recibidas</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Entrada Respuesta"}}
+            <h3 class="text-center my-auto">No se han encontrado respuestas recibidas</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Salida Peticion"}}
+            <h3 class="text-center my-auto">No se han encontrado peticiones enviadas</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Salida Respuesta"}}
+            <h3 class="text-center my-auto">No se han encontrado respuestas enviadas</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Consulta Peticion"}}
+            <h3 class="text-center my-auto">No se han encontrado peticiones</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Consulta Respuesta"}}
+            <h3 class="text-center my-auto">No se han encontrado respuestas</h3>
+            {{/if_equal}}
+            {{#if_equal bandeja "Inicio"}}
+            <h3 class="text-center my-auto" style="color:white;"><strong>No se han encontrado mensajes</strong></h3>
+            {{/if_equal}}
+        </div>
+        {{/if}}
+    </div>
+</div>

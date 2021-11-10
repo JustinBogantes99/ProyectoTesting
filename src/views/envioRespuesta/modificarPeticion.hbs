@@ -1,0 +1,172 @@
+<section id="contact" class="mt-5">
+    <div class="container">
+        <div class="section-header">
+            <h3 class="section-title">Modificando Petición</h3>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-8">
+                <div class="form">
+                    {{#if peticion}}
+                    <form id="signupForm" action="/inicio/modificar_peticion" method="POST"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="destinatario" value="{{peticion.destinatario}}">
+                        <input type="hidden" name="idPeticion" value="{{peticion.id}}">
+                        <div class="form-group row">
+                            <label for="idAsunto" class="col-lg-2 col-form-label text-right">Asunto:</label>
+                            <div class="col-lg-10">
+                                <input id="idAsunto" type="text" class="form-control" name="asunto" placeholder="Asunto"
+                                    autocomplete="off" value="{{peticion.asunto}}" required>
+                                <div class="valid-feedback">
+                                    Asunto.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Escriba un asunto
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="idDescripcion" class="col-lg-2 col-form-label text-right">Descripción:</label>
+                            <div class="col-lg-10">
+                                <textarea name="descripcion" id="idDescripcion" class="form-control textBI"
+                                    required>{{peticion.descripcion}}</textarea>
+                                <div class="valid-feedback">
+                                    Descripción.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción para que el usuario conozca que debe realizar.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-center">
+                            <label for="date" class="col-lg-2 col-form-label text-right">Fecha Limite Actual:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="" placeholder="Asunto" autocomplete="off"
+                                    value="{{fechaLimite}}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-lg-2 col-form-label text-right">Modificar Fecha Limite:</label>
+                            <div class="col-lg-10">
+                                {{#if peticion.peticionOrigen}}
+                                <input id="date" name="fechaLimite" type="text" class="datepicker-here form-control"
+                                    placeholder="Fecha Límite" data-language='en' data-date-format="yyyy-mm-dd"
+                                    autocomplete="off" onclick="console.log('hol2a');colocarFechaLimite('{{fechaLimite}}')" required>
+                                {{else}}
+                                <input id="date" name="fechaLimite" type="text" class="datepicker-here form-control"
+                                    placeholder="Fecha Límite" data-language='en' data-date-format="yyyy-mm-dd"
+                                    autocomplete="off" onclick="console.log('hola');colocarFechaMinima('{{fechaLimite}}')" required>
+                                {{/if}}
+                                <div class="valid-feedback">
+                                    Fecha Límite.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una fecha límite.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="idPrioridad" class="col-lg-2 col-form-label text-right">Prioridad:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="idPrioridad" name="prioridad"
+                                    value="{{peticion.prioridad}}" required>
+                                    {{#if_equal peticion.prioridad "Alto"}}
+                                    <option selected> Alto </option>
+                                    <option> Medio </option>
+                                    <option> Bajo </option>
+                                    {{/if_equal}}
+                                    {{#if_equal peticion.prioridad "Medio"}}
+                                    <option> Alto </option>
+                                    <option selected> Medio </option>
+                                    <option> Bajo </option>
+                                    {{/if_equal}}
+                                    {{#if_equal peticion.prioridad "Bajo"}}
+                                    <option> Alto </option>
+                                    <option> Medio </option>
+                                    <option selected> Bajo </option>
+                                    {{/if_equal}}
+                                </select>
+                                <div class="valid-feedback">
+                                    Prioridad.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una prioridad.
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <h5 class="text-center">Adjuntar Archivos (Opcional)</h5>
+
+                        <hr>
+
+                        <div class="form-group row">
+                            <label for="file" class="col-lg-2 col-form-label text-right">Archivos Adjuntos:</label>
+                            <div class="col-lg-10 my-auto">
+                                <input id="file" name="file" type="file" class="form-control" multiple>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                    </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{#if files}}
+        <div class="container col-lg-9 col-md-8">
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <strong>Documentos adjuntos:</strong>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        A continuación puede visualizar los archivos anteriormente agregados a esta respuesta.
+                        Puede descargarlos opcionalmente, pero lo principal es la función de eliminar un archivo
+                        sin posibilidad de recuperarlo una vez se utiliza.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    <br>
+    <div class="container col-lg-7 col-md-8">
+        <div class="row justify-content-md-center row-eq-height">
+            {{#each files}}
+            <div id="{{_id}}" class="col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body h-100">
+                        {{#if esImagen}}
+                        <img class="card-img-top" src="/imagen/{{filename}}" alt="Card image cap">
+                        {{/if}}
+                        <p class="card-title">{{originalname}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button id="{{_id}}" class="btn btn-danger btn-block btn_eliminarArchivo"><i
+                                        class="fa fa-trash-o"></i></button>
+                            </div>
+                            <br>
+                            <div class="col-lg-6">
+                                <form method="GET" action="/descargar/{{filename}}">
+                                    <button class="btn btn-primary btn-block"><i class="fa fa-download"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

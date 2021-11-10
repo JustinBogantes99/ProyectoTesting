@@ -1,0 +1,53 @@
+<section id="contact" class="mt-5">
+    <div class="container mb-4">
+        <div class="section-header">
+            <h3 class="section-title">
+                {{#if_equal bandeja "Entrada Peticion"}}
+                Peticiones Recibidas
+                {{/if_equal}}
+                {{#if_equal bandeja "Entrada Respuesta"}}
+                Respuestas Recibidas
+                {{/if_equal}}
+                {{#if_equal bandeja "Salida Peticion"}}
+                Peticiones Enviadas
+                {{/if_equal}}
+                {{#if_equal bandeja "Salida Respuesta"}}
+                Respuestas Enviadas
+                {{/if_equal}}
+            </h3>
+        </div>
+    </div>
+    
+    {{> busqueda}}
+
+    <div class="app_page1">
+        <div class="row justify-content-center mb-2">
+            <div class="col-lg-8 text-center align-self-center">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link {{#if_equal bandeja "Entrada Peticion"}}active{{/if_equal}}"
+                            href="/inicio/bandeja/bandeja_peticiones_recibidas" role="tab">
+                            <strong>Peticiones Recibidas</strong>
+                        </a>
+                        <a class="nav-item nav-link {{#if_equal bandeja "Salida Peticion"}}active{{/if_equal}}"
+                            href="/inicio/bandeja/bandeja_peticiones_enviadas" role="tab">
+                            <strong>Peticiones Enviadas</strong>
+                        </a>
+                        <a class="nav-item nav-link {{#if_equal bandeja "Entrada Respuesta"}}active{{/if_equal}}"
+                            href="/inicio/bandeja/bandeja_respuestas_recibidas" role="tab">
+                            <strong>Respuestas Recibidas</strong>
+                        </a>
+                        <a class="nav-item nav-link {{#if_equal bandeja "Salida Respuesta"}}active{{/if_equal}}"
+                            href="/inicio/bandeja/bandeja_respuestas_enviadas" role="tab">
+                            <strong>Respuestas Enviadas</strong>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        
+        {{> tarjetasBandeja}}
+        {{> paginacion}}
+
+    </div>
+</section>

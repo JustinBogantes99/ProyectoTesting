@@ -1,0 +1,55 @@
+<h5 class="text-center">Filtro para seleccionar destinatario</h5>
+
+<hr>
+
+<div class="row mb-3">
+    <div class="col-lg-2">
+        <button class="btn greenColor btn-block" type="button" data-toggle="collapse" data-target="#filtro_usuario"
+            aria-expanded="false" aria-controls="filtro_usuario"><i class="fa fa-filter" aria-hidden="true"></i>
+            Filtrar</button>
+    </div>
+    <div class="col-lg-10">
+        <select class="form-control" id="idUsuarios">
+            <option value="-1">No se han cargado usuarios</option>
+        </select>
+    </div>
+</div>
+<div class="collapse" id="filtro_usuario">
+    <div class="form-group row">
+        <label for="idNombreUsuario" class="col-lg-2 col-form-label text-right my-auto">Nombre:</label>
+        <div class="col-lg-4 my-auto">
+            <input id="idNombreUsuario" type="text" class="form-control" name="nombreUsuario" placeholder="Nombre"
+                autocomplete="off">
+        </div>
+
+        <label for="idCorreoUsuario" class="col-lg-2 col-form-label text-right">Correo:</label>
+        <div class="col-lg-4 my-auto">
+            <input id="idCorreoUsuario" type="text" class="form-control" name="correoUsuario" placeholder="Correo"
+                autocomplete="off">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="idEntidadUsuario" class="col-lg-2 col-form-label text-right">Entidad:</label>
+        <div class="col-lg-4 my-auto">
+            <input id="idEntidadUsuario" type="text" class="form-control my'auto" name="entidadUsuario"
+                placeholder="Entidad" autocomplete="off">
+        </div>
+
+        <label for="idDepartamentoUsuario" class="col-lg-2 col-form-label text-right">Departamento:</label>
+        <div class="col-lg-4 my-auto">
+            <input id="idDepartamentoUsuario" type="text" class="form-control my'auto" name="departamentoUsuario"
+                placeholder="Departamento" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row mx-auto justify-content-center">
+        <small>* El usuario debe tener un departamento asignado</small>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-lg-2 center">
+            <button id="btn_consultarUsuario" type="button" class="btn greenColor btn-block"><i class="fa fa-search"
+                    aria-hidden="true"></i> Buscar</button>
+        </div>
+    </div>
+</div>

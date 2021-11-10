@@ -1,0 +1,62 @@
+<div class="contenedor-div d-none d-md-none d-lg-block">
+    <div class="container">
+        <div class="card border-danger">
+            <div class="card-header text-center" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-danger btn-smbtn-danger btn-sm" id="toggleMemos">
+                        Memos
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseChat" class="collapse collapseMemos" aria-labelledby="headingOne">
+                <br>
+                <h4 class="text-center my-auto">
+                {{#if_equal peticion.remitente user.id}}
+                {{peticion.destinatarioNombre}}
+                {{/if_equal}}
+                {{#if_equal peticion.destinatario user.id}}
+                {{peticion.remitenteNombre}}
+                {{/if_equal}}
+                </h4>
+                <hr>
+                <div id="messages" class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <!--aqui va los memos-->
+                    {{#each memos}}
+                    {{#if_equal remitente ../user.id}}
+                        <small class="text-muted chatA text-right">{{fecha}}</small>
+                        <div class="toast bg-light border border-success my-1 chatA" role="alert" aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-body text-right misMensajes">
+                                {{mensaje}} &nbsp;
+                            </div>
+                        </div>
+                    {{/if_equal}}
+                    {{#if_not_equal remitente ../user.id}}
+                        <small class="text-muted chatB text-left">{{fecha}}</small>
+                        <div class="toast bg-light border border-dark my-1 chatB" role="alert" aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-body">
+                                &nbsp; {{mensaje}}
+                            </div>
+                        </div>
+                    {{/if_not_equal}}
+                    {{/each}}
+                </div>
+                <form onsubmit="return addMessage(this)">
+                    <input id="idPeticion" type="hidden" name="idPeticion" value="{{peticion._id}}">
+                    <input id="idRemitente" type="hidden" name="idRemitente" value="{{user.id}}">
+                    <input id="nombreRemitente" type="hidden" name="nombreRemitente"
+                        value="{{user.nombre}} {{user.apellido1}} {{user.apellido2}}">
+                    <div class="inputMemos mt-2 mb-0">
+                        <input id="idMensaje" type="text" class="form-control" name="asunto" placeholder="Asunto" autocomplete="off"
+                            required>
+                    </div>
+                    <div class="form-group formMemos mt-2 mb-0">
+                        <button id="btnSubmit" type="submit" class="btn btn-block greenColor">&#x23f5</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/socket/memos.js"></script>

@@ -1,0 +1,42 @@
+<section id="services">
+    <div class="mt-4"></div>
+    <br>
+    <div class="container wow fadeIn">
+        <div class="section-header">
+            <h3 class="text-center">Servicios</h3>
+            <p class="section-description">
+                Como usuario puede acceder a la siguiente gama de funciones:
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="box">
+                    <div class="icon"><a href="/inicio/bandeja"><i class="fa fa-archive"></i></a></div>
+                    <h4 class="title">Acceso a la Bandeja de Peticiones</h4>
+                    <p class="description">En RequesTEC podrá acceder a los distintos tipos de bandejas, desde donde
+                        podrá visualizar los distintos tipos de peticiones.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="box">
+                    <div class="icon"><a href="/inicio/formular_peticion"><i class="fa fa-envelope-o"></i></a></div>
+                    <h4 class="title">Crear Petición</h4>
+                    <p class="description">Cree una peticion que podrá enviar a los distintos usuario, registrados en el
+                        sistema.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="call-to-action">
+    <div class="container wow fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 align-self-center">
+                <h3 class="cta-title text-center">Bandeja Rápida</h3>
+                <p class="cta-text text-center">Acceda rápidamente a sus últimas peticiones o respuestas recibidas.</p>
+            </div>
+        </div>
+        {{> tarjetasBandeja}}
+    </div>
+</section>

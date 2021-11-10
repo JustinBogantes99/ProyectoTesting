@@ -1,0 +1,74 @@
+<nav class="mt-2">
+    <ul class="pagination justify-content-center">
+        {{#if pagina.valida}}
+        {{#if pagina.unaPagina}}
+        <li class="page-item active">
+            <a class="page-link disabled" href="#">
+                {{pagina.textoRegresar}}
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        {{else}}
+        {{#if pagina.anterior}}
+        <li class="page-item">
+            <a class="page-link" href="{{pagina.href}}{{pagina.valAnterior}}{{pagina.bhref}}" aria-label="Anterior">
+                {{else}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Anterior">
+                {{/if}}
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Anterior</span>
+            </a>
+        </li>
+        <li class="page-item {{#if_equal pagina.primera_pagina pagina.paginaActual}}active{{/if_equal}}">
+            <a class="page-link" href="{{pagina.href}}{{pagina.primera_pagina}}{{pagina.bhref}}">
+                {{pagina.primera_pagina}}
+            </a>
+        </li>
+        {{#if pagina.separacionIzquierda}}
+        <li class="page-item">
+            <a class="page-link disabled" href="#">
+                ..
+            </a>
+        </li>
+        {{/if}}
+        {{#each pagina.paginasIntermedias}}
+        <li class="page-item {{#if_equal this ../pagina.paginaActual}}active{{/if_equal}}">
+            <a class="page-link" href="{{pagina.href}}{{ this }}{{../pagina.bhref}}">
+                {{ this }}
+            </a>
+        </li>
+        {{/each}}
+        {{#if pagina.separacionDerecha}}
+        <li class="page-item">
+            <a class="page-link disabled" href="#">
+                ..
+            </a>
+        </li>
+        {{/if}}
+        <li class="page-item {{#if_equal pagina.ultima_pagina pagina.paginaActual}}active{{/if_equal}}">
+            <a class="page-link" href="{{pagina.href}}{{pagina.ultima_pagina}}{{pagina.bhref}}">
+                {{pagina.ultima_pagina}}
+            </a>
+        </li>
+        {{#if pagina.siguiente}}
+        <li class="page-item">
+            <a class="page-link" href="{{pagina.href}}{{pagina.valSiguiente}}{{pagina.bhref}}" aria-label="Siguiente">
+                {{else}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Siguiente">
+                {{/if}}
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </li>
+        {{/if}}
+        {{else}}
+        <li class="page-item">
+            <a class="page-link"
+                href="{{pagina.href}}{{pagina.primera_pagina}}{{pagina.bhref}}">{{pagina.textoRegresar}}
+            </a>
+        </li>
+        {{/if}}
+    </ul>
+</nav>

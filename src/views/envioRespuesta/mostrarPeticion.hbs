@@ -1,0 +1,181 @@
+<section id="contact" class="mt-5" >
+    <div class="container mb-4">
+        <div class="section-header">
+            <h3 class="section-title">Detalle de la petición</h3>
+        </div>
+    </div>
+
+    {{#if peticion}}
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-8">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <p class="card-text"><strong>Asunto: </strong>{{peticion.asunto}}
+                                {{#if_equal peticion.estado "Activo"}}
+                                <span style="color:rgb(0,40,85);">(Activa)</span>
+                                {{/if_equal}}
+                                {{#if_equal peticion.estado "Inactivo"}}
+                                <span style="color:springgreen;">(Inactiva)</span>
+                                {{/if_equal}}
+                            </p>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <p class="card-text"><strong>Consecutivo: </strong>{{peticion.codigo}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <p class="card-text">
+                                <strong>De:</strong> {{peticion.remitenteNombre}} ({{peticion.remitenteCorreo}})
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p class="card-text">
+                                <strong>Para:</strong> {{peticion.destinatarioNombre}} ({{peticion.destinatarioCorreo}})
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p class="card-text"><strong>Prioridad: </strong>{{peticion.prioridad}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <strong>Fecha de Creación:</strong>
+                            <p class="card-text">{{peticion.fechaInicio}}</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <strong>Fecha de Actualización:</strong>
+                            <p class="card-text">{{peticion.fechaActualizacion}}</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <strong>Fecha Límite:</strong>
+                            <p class="card-text">{{peticion.fechaLimiteFormat}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <strong>Descripción:</strong>
+                    <textarea name="descripcion" id="idDescripcion" class="form-control vistaBI" disabled>
+                    {{peticion.descripcion}}
+                </textarea>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Documentos adjuntos:</strong>
+                        {{#if files}}
+                        A continuación puede observar los archivos asociados a la petición.
+                        {{else}}
+                        No hay archivos asociados a la petición.
+                        {{/if}}
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <div class="row justify-content-md-center row-eq-height">
+                    {{#each files}}
+                    <div class="col-lg-3">
+                        <div class="card h-100">
+                            <div class="card-body h-100">
+                                {{#if esImagen}}
+                                <img class="card-img-top" src="/imagen/{{filename}}" alt="Card image cap">
+                                {{/if}}
+                                <p class="card-title">{{originalname}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <form method="GET" action="/descargar/{{filename}}">
+                                    <button class="btn btn-primary btn-block"><i class="fa fa-download"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                {{#if peticion.permisoVerOrigen}}
+                {{#if peticion.peticionOrigen}}
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <a class="btn btn-block greenColor"
+                            href="/inicio/mostrar_peticion/{{peticion.peticionOrigen}}">Ver petición origen</a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{#if respuesta}}
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <a class="btn btn-block greenColor" href="/inicio/mostrar_respuesta/{{respuesta.0._id}}">Ver
+                            respuesta asociada</a>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if_equal peticion.destinatario user.id}}
+                <!-- destinatario es el usuario actual -->
+                {{#if_equal peticion.estado "Activo"}}
+                {{#if respuesta}}
+                <div class="col-lg-4">
+                    <a href="/inicio/delegar_peticion/{{peticion._id}}" class="btn btn-block greenColor">Delegar esta
+                        petición</a>
+                </div>
+                {{else}}
+                <div class="col-lg-4">
+                    <a href="/inicio/delegar_peticion/{{peticion._id}}" class="btn btn-block greenColor">Delegar esta
+                        petición</a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="/inicio/responder_peticion/{{peticion._id}}" class="btn btn-block greenColor">Responder a
+                        esta petición</a>
+                </div>
+                {{/if}}
+                {{/if_equal}}
+
+                {{else}}
+                {{#if_equal peticion.remitente user.id}}
+                <!-- remitente es el usuario actual -->
+                <div class="col-lg-4">
+                    <a href="/inicio/modificar_peticion/{{peticion._id}}" class="btn btn-block greenColor">Modificar
+                        esta petición</a>
+                </div>
+                {{/if_equal}}
+                <!-- usuario actual no es remitente ni destinatario -->
+                {{/if_equal}}
+
+                <!-- Historial-->
+                {{#if peticion.permisoHistorial}}
+                <div class="col-lg-4">
+                    <a href="/inicio/historial/{{peticion.codigo}}" class="btn btn-block greenColor">Historial</a>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>
+{{#if_not_equal peticion.destinatario user.id}}
+{{#if_not_equal peticion.remitente user.id}}
+{{else}}
+{{> memos}}
+{{/if_not_equal}}
+{{else}}
+{{> memos}}
+{{/if_not_equal}}
+
+
+{{else}}
+<div class="container text-center">
+    <h3>No hay petición que mostrar.</h3>
+    <a href="/inicio/bandeja" class="btn greenColor text-center">Ir a la sección de bandejas.</a>
+</div>
+</section>
+{{/if}}

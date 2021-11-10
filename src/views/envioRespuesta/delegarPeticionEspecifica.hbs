@@ -1,0 +1,210 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_detallesPeticion" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_asuntoPeticion">{{nombrePeticion}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Consecutivo: <i id="modal_codigo">{{codigo}}</i></p>
+                <textarea id="modal_descripcionPeticion" class="form-control vistaBI"
+                    disabled>{{descripcion}}</textarea>
+                <br>
+                <p><i id="modal_remitentePeticion">De: {{remitente}}</i></p>
+                <hr>
+                <p>Para más información, siga el siguiente <a id="modal_linkPeticion"
+                        href="/inicio/mostrar_peticion/{{idPeticion}}" target="_blank">enlace</a>.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="contact" class="mt-5">
+    <div class="container">
+        <div class="section-header">
+            <h3 class="section-title">Delegando la petición:</h3>
+            <p class="section-description"><a href="" data-toggle="modal"
+                    data-target="#modal_detallesPeticion">{{nombrePeticion}} (Detalles)</a></p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-8">
+
+                <!--Empiezan filtros-->
+                <div class="collapse" id="filtro_peticion">
+                    <div class="form-group row">
+                        <label for="idNombrePeticion" class="col-lg-2 col-form-label text-right">Nombre de la
+                            petición:</label>
+                        <div class="col-lg-10 my-auto">
+                            <input id="idNombrePeticion" type="text" class="form-control" name="nombrePeticion"
+                                placeholder="Petición" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-lg-2 center">
+                            <button id="btn_consultarPeticion" type="button" class="btn greenColor btn-block"><i
+                                    class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="col-lg-2 center">
+                            <button id="btn_detallePeticion" type="button"
+                                class="btn greenColor btn-block">Detalles</button>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                {{> filtroUsuario}}
+
+                <!-- Empieza formulario-->
+                <br>
+                <h5 class="text-center">Cuerpo de la delegación</h5>
+                <hr>
+                <div class="form">
+                    <form id="signupForm" action="/inicio/agregar_delegacion" method="POST"
+                        enctype="multipart/form-data">
+                        <input type="hidden" value="1" name="ventana">
+                        <input type="hidden" id="idUsuario" value="{{user.id}}">
+                        <input type="hidden" id="asuntoPreliminar" value="{{idPeticion}}" name="idPeticion">
+                        <input type="hidden" id="usuarioDestino" value="" name="destinatario">
+                        <input type="hidden" id="idDestinatarios" value="{{remitente}}">
+                        <input type="hidden" name="nivel" value="{{nivel}}">
+
+                        <div class="form-group row">
+                            <label for="idAsunto" class="col-lg-2 col-form-label text-right">Asunto:</label>
+                            <div class="col-lg-10">
+                                <input id="idAsunto" type="text" class="form-control" name="asunto" placeholder="Asunto"
+                                    autocomplete="off" value="{{nombrePeticion}}" required />
+                                <div class="valid-feedback">
+                                    Asunto.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Seleccione una petición del <i>Filtro de selección de peticiones</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="destinatario" class="col-lg-2 col-form-label text-right">Usuario:</label>
+                            <div class="col-lg-10">
+                                <input id="destinatario" type="text" class="form-control my-auto readonly"
+                                    name="destinatarioCorreo" placeholder="Seleccione un usuario del Filtro de Usuarios"
+                                    autocomplete="off" required />
+                                <div class="valid-feedback">
+                                    Usuario.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Seleccione un usuario de la sección <i>Filtro de selección de usuario</i>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="idDescripcion" class="col-lg-2 col-form-label text-center">Descripción:</label>
+                            <div class="col-lg-10">
+                                <textarea name="descripcion" id="idDescripcion" class="form-control textBI"
+                                    placeholder="Descripción de la Tarea" required></textarea>
+                                <div class="valid-feedback">
+                                    Descripción.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción para que el usuario conozca que debe realizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="text-center">
+                                        <label for="date">Fecha Límite</label>
+                                    </div>
+                                    <div class="col-lg-8 container text-center">
+                                        <input id="date" name="fechaLimite" type="text"
+                                            class="datepicker-here form-control readonly" placeholder="Fecha Límite"
+                                            value="{{fecha_limite}}" data-language='en' data-date-format="yyyy-mm-dd"
+                                            autocomplete="off" onclick="colocarFechaLimite('{{fechaLimite}}')"
+                                            required />
+                                        <div class="valid-feedback">
+                                            Fecha Límite.
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Ingrese una fecha límite.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center">
+                                        <label for="idPrioridad">Prioridad</label>
+                                    </div>
+                                    <div class="col-lg-8 container">
+                                        <select class="form-control" id="idPrioridad" name="prioridad">
+                                            <option>Alto</option>
+                                            <option>Medio</option>
+                                            <option>Bajo</option>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Prioridad.
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Ingrese una prioridad.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <h5 class="text-center">Agregar Archivos Adjuntos</h5>
+                        <hr>
+
+                        {{#if archivos}}
+                        <div class="form-group row justify-content-center">
+                            <div class="col-lg-10">
+                                <table class="table table-condensed table-striped">
+                                    <thead>
+                                        <tr class="d-flex">
+                                            <th class="col-2 text-center">Agregar</th>
+                                            <th class="col-10 text-center">Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-body">
+                                        {{#each archivos}}
+                                        <tr class="d-flex">
+                                            <td class="col-2 clickable-row">
+                                                <div class="form-check text-center">
+                                                    <input class="form-check-input checkbox-archivos" type="checkbox" name="archivos" value="{{_id}}|{{originalname}}">
+                                                </div>
+                                            </td>
+                                            <td class="col-10"><a href="/descargar/{{filename}}">{{originalname}}</a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <div class="form-group row">
+                            <label for="file" class="col-lg-2 col-form-label text-right">Nuevos archivos:</label>
+                            <div class="col-lg-10 my-auto">
+                                <input id="file" name="file" type="file" class="form-control" multiple>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Delegar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

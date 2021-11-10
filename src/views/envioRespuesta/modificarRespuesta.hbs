@@ -1,0 +1,119 @@
+<section id="contact" class="mt-5">
+    <div class="container">
+        <div class="section-header">
+            <h3 class="section-title">Modificando Respuesta</h3>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-8">
+                <div class="form">
+                    {{#if respuesta}}
+                    <form id="signupForm" action="/inicio/modificar_respuesta" method="POST"
+                        enctype="multipart/form-data">
+
+                        <div class="form-group row">
+                            <label for="idAsunto" class="col-lg-2 col-form-label text-right">Asunto:</label>
+                            <div class="col-lg-10">
+                                <input id="idAsunto" type="text" class="form-control readonly" name="asunto" placeholder="Asunto"
+                                    autocomplete="off" value="{{respuesta.asunto}}" required>
+                                <div class="valid-feedback">
+                                    Asunto.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Seleccione una respuesta del <i>Filtro de selección de peticiones</i>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="idDescripcion" class="col-lg-2 col-form-label text-right">Descripción:</label>
+                            <div class="col-lg-10">
+                                <textarea name="descripcion" id="idDescripcion" class="form-control textBI"
+                                    required>{{respuesta.descripcion}}</textarea>
+                                <div class="valid-feedback">
+                                    Descripción.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción para que el usuario conozca que debe realizar.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h5 class="text-center">Adjuntar Archivos (Opcional)</h5>
+
+                        <hr>
+                        <div class="form-group row">
+                            <label for="idFiles" class="col-lg-2 col-form-label text-right">Archivos Adjuntos:</label>
+                            <div class="col-lg-10 my-auto">
+                                <input id="idFiles" type="file" class="form-control" name="file" multiple>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                        <input type="hidden" value="{{respuesta.id}}" name="idRespuesta">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if files}}
+    <div class="container col-lg-7 col-md-8">
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <strong>Documentos adjuntos:</strong>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    A continuación puede visualizar los archivos anteriormente agregados a esta respuesta. Puede
+                    descargarlos opcionalmente, pero lo principal es la función de eliminar un archivo sin posibilidad
+                    de recuperarlo una vez se utiliza.
+                </p>
+            </div>
+        </div>
+        {{/if}}
+        <br>
+        <div class="container">
+            <div class="row justify-content-md-center row-eq-height">
+                {{#each files}}
+                <div id="{{_id}}" class="col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body h-100">
+                            {{#if esImagen}}
+                            <img class="card-img-top" src="/imagen/{{filename}}" alt="Card image cap">
+                            {{/if}}
+                            <p class="card-title">{{originalname}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button id="{{_id}}" class="btn btn-danger btn-block btn_eliminarArchivo"><i
+                                            class="fa fa-trash-o"></i></button>
+                                </div>
+                                <br>
+                                <div class="col-lg-6">
+                                    <form method="GET" action="/descargar/{{filename}}">
+                                        <button class="btn btn-primary btn-block"><i
+                                                class="fa fa-download"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>
+{{else}}
+<div class="container text-center">
+    <h3>No hay respuesta que mostrar.</h3>
+    <a href="/inicio/bandejas" class="btn greenColor text-center">Ir a la sección de bandejas.</a>
+</div>
+</section>
+{{/if}}

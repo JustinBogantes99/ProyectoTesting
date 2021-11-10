@@ -1,0 +1,103 @@
+<div class="modal fade" id="modal_detallesPeticion" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_asuntoPeticion">{{peticion.asunto}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="modal_descripcionPeticion" class="form-control vistaBI" disabled>{{peticion.descripcion}}</textarea>
+                <br>
+                <p><i id="modal_remitentePeticion">De: {{remitente.correo}}</i></p>
+                <hr>
+                <p>Para más información, siga el siguiente <a id="modal_linkPeticion" target="_blank" href="/inicio/mostrar_peticion/{{peticion._id}}">enlace</a>.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="contact" class="mt-5">
+    <div class="container">
+        <div class="section-header">
+            <h3 class="section-title">Respondiendo a la petición:</h3>
+            <p class="section-description"><a href="" data-toggle="modal" data-target="#modal_detallesPeticion">{{peticion.asunto}} (Detalles)</a></p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9 col-md-8">
+                <div class="form">
+                    <form id="signupForm" action="/inicio/agregar_respuesta" method="POST"
+                        enctype="multipart/form-data">
+                        <input type="hidden" id="idUsuario" value="{{user.id}}" name="remitente">
+                        <input type="hidden" id="asuntoPreliminar" value="{{peticion.id}}" name="peticionOrigen">
+                        <input type="hidden" id="usuarioDestino" value="{{remitente.id}}" name="destinatario">
+                        <div class="form-group row">
+                            <label for="idAsunto" class="col-lg-2 col-form-label text-center">Asunto:</label>
+                            <div class="col-lg-10">
+                                <input id="idAsunto" type="text" class="form-control readonly" name="asuntoOriginal"
+                                    placeholder="Asunto" value="{{peticion.asunto}}" required/>
+                                <div class="valid-feedback">
+                                    Asunto.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese un nombre de asunto.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="idDestinatarios" class="col-lg-2 col-form-label text-center">Para:</label>
+                            <div class="col-lg-10">
+                                <input id="idDestinatarios" type="text" class="form-control readonly"
+                                    name="destinatarios" placeholder="Destinatarios" value="{{remitente.correo}}" required/>
+                                <div class="valid-feedback">
+                                    Destinatario.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese uno o más destinatarios de la petición.
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label for="idDescripcion" class="col-lg-2 col-form-label text-center">Descripción:</label>
+                            <div class="col-lg-10">
+                                <textarea name="descripcion" id="idDescripcion" class="form-control textBI"
+                                    placeholder="Descripción de la Petición" required></textarea>
+                                <div class="valid-feedback">
+                                    Descripción.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción de tarea.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h5 class="text-center">Adjuntar Archivos (Opcional)</h5>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="idFiles" class="col-lg-3 col-form-label text-center">Archivos Adjuntos:</label>
+                            <div class="col-lg-9">
+                                <input id="idFiles" type="file" class="form-control" name="file" multiple>
+                                <div class="valid-feedback">
+                                    Archivos.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,158 @@
+<section id="hero">
+    <div class="hero-container">
+        <h1>Bienvenido a GenMat, {{user.nombre}}</h1>
+        <h2>
+            {{#if_equal user.tipo_usuario "1"}}
+            Revise nuevos periodos de matrícula y únase si es que lo desea.
+            {{/if_equal}}
+            {{#if_equal user.tipo_usuario "2"}}
+            Visualice los cursos a los que fue asignado y los estudiantes matriculados.
+            {{/if_equal}}
+            {{#if_equal user.tipo_usuario "3"}}
+            Monitoree los períodos de matrícula y los cursos que llevan dentro.
+            {{/if_equal}}
+        </h2>
+        {{#if_equal user.tipo_usuario "1"}}
+        <a href="#portfolio" class="btn-get-started">Ver períodos de matrícula</a>
+        {{/if_equal}}
+    </div>
+</section>
+
+{{#if_equal user.tipo_usuario "1"}}
+{{> portfolio}}
+{{/if_equal}}
+
+<section id="services">
+    <div class="container wow fadeIn">
+        <div class="section-header">
+            <h3 class="section-title">Servicios</h3>
+            <p class="section-description">
+                Como
+                {{#if_equal user.tipo_usuario "1"}}
+                estudiante
+                {{/if_equal}}
+                {{#if_equal user.tipo_usuario "2"}}
+                profesor
+                {{/if_equal}}
+                {{#if_equal user.tipo_usuario "3"}}
+                administrador
+                {{/if_equal}}
+                usted puede acceder a la siguiente gama de funciones:
+            </p>
+        </div>
+        <div class="row">
+            {{#if_equal user.tipo_usuario "1"}}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="box">
+                    <div class="icon"><a href="#portfolio"><i class="fa fa-road"></i></a></div>
+                    <h4 class="title">Seleccionar Período</h4>
+                    <p class="description">En GenMat se provee un sistema de períodos de matrícula que agrupan cursos en los que usted podría matricularse.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="box">
+                    <div class="icon"><a href="/join_forum"><i class="fa fa-paper-plane"></i></a></div>
+                    <h4 class="title">Foro de Discusión</h4>
+                    <p class="description">Comparta opiniones y preguntas con otros estudiantes o profesores ya sea sobre períodos de matrícula u otros temas.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="box">
+                    <div class="icon"><a href="/show_history_student"><i class="fa fa-bar-chart"></i></a></div>
+                    <h4 class="title">Historial de Matrículas</h4>
+                    <p class="description">Aquí podrá visualizar información de matrículas anteriores, así como datos numéricos de interés.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="box">
+                    <div class="icon"><a href="/show_teachers"><i class="fa fa-eye"></i></a></div>
+                    <h4 class="title">Listado de Profesores</h4>
+                    <p class="description">Aquí se puede encontrar la lista de profesores registrados oficialmente en el sistema. Si el profesor lo permite también podría opinar sobre él o ella.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1s">
+                <div class="box">
+                    <div class="icon"><a href="/show_profile"><i class="fa fa-folder"></i></a></div>
+                    <h4 class="title">Perfil de Estudiante</h4>
+                    <p class="description">Revise su perfil en el sistema y modifíquelo si considera oportuno. Profesores podrían acceder a este en caso de necesitarlo.</p>
+                </div>
+            </div>
+            {{/if_equal}}
+            {{#if_equal user.tipo_usuario "2"}}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="box">
+                    <div class="icon"><a href="/new_suggest"><i class="fa fa-bookmark-o"></i></a></div>
+                    <h4 class="title">Solicitudes a Administradores</h4>
+                    <p class="description">Usted puede solicitar o recomendar la apertura o cierre de cursos e incluso podría proponer nuevas ideas para cursos. Funciona como un buzón.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="box">
+                    <div class="icon"><a href="/show_inscriptions"><i class="fa fa-bell"></i></a></div>
+                    <h4 class="title">Cursos impartidos</h4>
+                    <p class="description">Acceda a los cursos que imparte y los estudiantes miembros de los cursos.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="box">
+                    <div class="icon"><a href="/join_forum"><i class="fa fa-paper-plane"></i></a></div>
+                    <h4 class="title">Foro de Discusión</h4>
+                    <p class="description">Comparta con estudiantes y otros profesores en un foro donde pueda resolver dudas sobre períodos y cursos.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="box">
+                    <div class="icon"><a href="/show_history_teacher"><i class="fa fa-bar-chart"></i></a></div>
+                    <h4 class="title">Historial de Matrículas</h4>
+                    <p class="description">Aquí podrá visualizar información de cursos impartidos en matrículas pasadas.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1s">
+                <div class="box">
+                    <div class="icon"><a href="/show_profile"><i class="fa fa-folder"></i></a></div>
+                    <h4 class="title">Perfil de Profesor</h4>
+                    <p class="description">Revise su perfil en el sistema y modifíquelo si considera oportuno. Estudiantes podrían acceder a este en caso de necesitarlo.</p>
+                </div>
+            </div>
+            {{/if_equal}}
+            {{#if_equal user.tipo_usuario "3"}}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="box">
+                    <div class="icon"><a href="/manage_inscription"><i class="fa fa-certificate"></i></a></div>
+                    <h4 class="title">Administrar Períodos</h4>
+                    <p class="description">Tanto crear como deshabilitar períodos de matrícula está permitido. También podrá realizar las mismas funciones con los cursos.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="box">
+                    <div class="icon"><a href="/manage_user"><i class="fa fa-user"></i></a></div>
+                    <h4 class="title">Crear Usuarios</h4>
+                    <p class="description">En este modulo se podran crear usuarios de cualquiera de los tres tipos disponibles, sin necesidad de ninguna autorización extra.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="box">
+                    <div class="icon"><a href="/show_suggestion"><i class="fa fa-bookmark-o"></i></a></div>
+                    <h4 class="title">Sugerencias de Profesores</h4>
+                    <p class="description">Aquí podrá mantener comunicación con las solicitudes o recomendaciones que los profesores puedan elevar a usted como administrador. Funciona como un buzón.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="box">
+                    <div class="icon"><a href="/show_forum"><i class="fa fa-paper-plane"></i></a></div>
+                    <h4 class="title">Regulación de Foro</h4>
+                    <p class="description">Mantenga un control completo sobre los mensajes que puedan ser considerados ofensivos o inapropiados.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1s">
+                <div class="box">
+                    <div class="icon"><a href="/show_history"><i class="fa fa-bar-chart"></i></a></div>
+                    <h4 class="title">Dashboard</h4>
+                    <p class="description">Aquí podrá obtener estadísticas de uso del sistema, períodos de matrícula según afluencia de estudiantes y otros datos más.</p>
+                </div>
+            </div>
+            {{/if_equal}}
+        </div>
+
+    </div>
+</section>

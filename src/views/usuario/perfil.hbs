@@ -1,0 +1,228 @@
+<section id="contact" class="mt-5">
+    <div class="container wow fadeInUp pb-0 mb-0">
+
+        <div class="row">
+            <div class="col-sm-6 pl-1 pr-1">
+
+                <div class="card mb-5 mx-2">
+                    <div class="card-header pb-0">
+                        <h4>Identificación</h4>
+                    </div>
+                    <div class="card-body pb-0 pt-1">
+                        <form action="/inicio/perfil/modificarNombre?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-sm-4 col-form-label" for="nombre">
+                                    <h5>Nombre</h5>
+                                </label>
+                                <div class="m-auto col-sm-6">
+                                    <input id="nombre" type="text" class="form-control" name="nombre"
+                                        value="{{user.nombre}}">
+                                </div>
+                                <div class="m-auto col-sm-2">
+                                    <button class="btn btn-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/inicio/perfil/modificarApellido1?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-sm-4 col-form-label" for="apellido1">
+                                    <h5>1<sup>er</sup> Apellido</h5>
+                                </label>
+                                <div class="m-auto col-sm-6">
+                                    <input id="apellido1" type="text" class="form-control" name="apellido1"
+                                        value="{{user.apellido1}}">
+                                </div>
+                                <div class="m-auto col-sm-2">
+                                    <button class="btn btn-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/inicio/perfil/modificarApellido2?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-sm-4 col-form-label" for="apellido2">
+                                    <h5>2<sup>do</sup> Apellido</h5>
+                                </label>
+                                <div class="m-auto col-sm-6">
+                                    <input id="apellido2" type="text" class="form-control" name="apellido2"
+                                        value="{{user.apellido2}}">
+                                </div>
+                                <div class="m-auto col-sm-2">
+                                    <button class="btn btn-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group row">
+                            <label class="m-auto col-sm-4 col-form-label" for="depart">
+                                <h5>Departamento</h5>
+                            </label>
+                            <div class="m-auto col-sm-6">
+                                <input id="depart" type="text" class="form-control" name="depart"
+                                    value="{{departamento}}" readonly>
+                            </div>
+                            <div class="m-auto col-sm-2">
+                                <button class="btn btn-primary btn-block" type="button" data-toggle="collapse"
+                                    data-target="#collapseDepartamento" aria-expanded="false"
+                                    aria-controls="collapseDepartamento">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="m-auto col-sm-4 col-form-label"></label>
+                            <div class="collapse m-auto col-sm-8" id="collapseDepartamento">
+                                <hr class="mt-0">
+                                <div class="input-group mb-2">
+
+                                    <div class="input-group-prepend">
+                                        <button class="btn dropdown-toggle btn-filtro" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">Entidad</button>
+                                        <div class="dropdown-menu" style="width: 250px;">
+                                            <div class="px-1 pt-1">
+                                                <div class="form-group">
+                                                    <label class="mb-0" for="buscar_NombreEntidad">Nombre:</label>
+                                                    <input type="text" class="form-control" name="buscar_NombreEntidad"
+                                                        id="buscar_NombreEntidad" placeholder="Nombre de la entidad"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-0" for="seleccionar_Entidad">Sugerencias:</label>
+                                                <select multiple class="form-control scrollbar2"
+                                                    id="seleccionar_Entidad">
+                                                    <option value="" title="No se han encontrado sugerencias">No se han
+                                                        encontrado sugerencias</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="entidad" id="entidad" class="form-control"
+                                        placeholder="Seleccione una entidad" type="text" readonly />
+                                    <input type="hidden" name="idEntidad" id="idEntidad" type="text">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <button class="btn dropdown-toggle btn-filtro" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">Depart. </button>
+                                        <div class="dropdown-menu" style="width: 250px;">
+                                            <div class="px-1 pt-1">
+                                                <div class="form-group">
+                                                    <label class="mb-0" for="buscar_NombreDepartamento">Nombre:</label>
+                                                    <input type="text" class="form-control" name="buscar_NombreDepartamento" id="buscar_NombreDepartamento" placeholder="Nombre del departamento" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-0" for="seleccionar_Departamento">Sugerencias:</label>
+                                                <select multiple class="form-control scrollbar2"
+                                                    id="seleccionar_Departamento">
+                                                    <option value="" title="No se han encontrado sugerencias">No se han
+                                                        encontrado sugerencias</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="departamento" id="departamento" class="form-control"
+                                        placeholder="Seleccione un departamento" type="text" readonly />
+
+                                    <form action="/inicio/perfil/modificarDepartamento?_method=PUT" method="POST">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="idDepartamento" id="idDepartamento" type="text" value="">
+                                        <div class="m-auto">
+                                            <button class="btn btn-primary btn-block" type="submit"><i
+                                                    class="fa fa-pencil"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 pl-1 pr-1">
+                <div class="card mb-4 mx-2">
+                    <div class="card-header pb-0">
+                        <h4>Contacto</h4>
+                    </div>
+                    <div class="card-body pb-0 pt-1">
+                        <div class="form-group row">
+                            <label class="m-auto col-sm-4 col-form-label" for="email">
+                                <h5>Email</h5>
+                            </label>
+                            <div class="m-auto col-sm-8">
+                                <input id="email" type="email" class="form-control" name="email" value="{{user.correo}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <form action="/inicio/perfil/modificarTelefono?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-sm-4 col-form-label" for="telefono">
+                                    <h5>Telefono</h5>
+                                </label>
+                                <div class="m-auto col-sm-6">
+                                    <input id="telefono" type="text" class="form-control" pattern="[0-9]{4}-[0-9]{4}"
+                                        name="telefono" value="{{user.telefono}}">
+                                    <small id="telefonoayuda" class="form-text text-muted">Siga el formato
+                                        '####-####'</small>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-5 mx-2">
+                    <div class="card-header pb-0">
+                        <h4>Contraseña</h4>
+                    </div>
+                    <div class="card-body pb-0 pt-1">
+                        <form action="/inicio/perfil/modificarContrasenna?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row mt-0 mb-0">
+                                <label class="m-auto col-sm-4 col-form-label" for="prevPassword">
+                                    <h5>Anterior Contraseña</h5>
+                                </label>
+                                <div class="m-auto col-sm-8">
+                                    <input id="prevPassword" type="password" class="form-control"
+                                        name="contrasennaAnterior" required />
+                                </div>
+                            </div>
+                            <div class="form-group row mt-0 mb-0">
+                                <label class="m-auto col-sm-4 col-form-label" for="password">
+                                    <h5>Contraseña</h5>
+                                </label>
+                                <div class="m-auto col-sm-8">
+                                    <input id="password" type="password" class="form-control" name="nuevaContrasenna"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="form-group row mt-0 mb-0">
+                                <label class="m-auto col-sm-4 col-form-label" for="confirm_password">
+                                    <h5>Confirmar</h5>
+                                </label>
+                                <div class="m-auto col-sm-6">
+                                    <input id="confirm_password" type="password" class="form-control"
+                                        name="nuevaContrasennaConfirmacion" required />
+                                </div>
+                                <div class="m-auto col-sm-2">
+                                    <button class="btn btn-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

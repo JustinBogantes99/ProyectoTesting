@@ -1,0 +1,154 @@
+<form action="/inicio/bandeja/bandeja_consulta/1?" method="get" class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button class="btn dropdown-toggle btn-filtro" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Consultar por</button>
+        <div class="dropdown-menu">
+            <div class="px-1 pt-1">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="radio" class="buscar_porTipo1" name="buscar_porTipo" id="buscar_porTipo11" value="0"
+                            {{#if (isdefined filtros)}} {{#if (isdefined filtros.buscar_porTipo)}}
+                            {{#if_equal filtros.buscar_porTipo "0"}}checked{{/if_equal}}
+                            {{#if_equal filtros.buscar_porTipo ""}}checked{{/if_equal}}
+                            {{else}}checked{{/if}}
+                            {{else}}checked{{/if}}>
+                        <label class="form-check-label" for="buscar_porTipo11">
+                            Petición
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="buscar_porTipo2" name="buscar_porTipo" id="buscar_porTipo12" value="1"
+                            {{#if_equal filtros.buscar_porTipo "1"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="buscar_porTipo12">
+                            Respuesta
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group-prepend">
+        <button class="btn dropdown-toggle btn-filtro" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Persona</button>
+        <div class="dropdown-menu" style="width: 250px;">
+            <div class="px-1 pt-1">
+                <div class="form-group">
+                    <label for="buscar_NombrePersona1">Nombre:</label>
+                    <input type="text" class="form-control" name="buscar_NombrePersona1" id="buscar_NombrePersona1"
+                        placeholder="Nombre Apellidos" value="{{filtros.buscar_NombrePersona1}}">
+                </div>
+                <div class="form-group">
+                    <label for="buscar_CorreoPersona1">Correo:</label>
+                    <input type="text" class="form-control" name="buscar_CorreoPersona1" id="buscar_CorreoPersona1"
+                        placeholder="email@ejemplo.com" value={{filtros.buscar_CorreoPersona1}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="seleccionar_Persona1">Sugerencias:</label>
+                <select multiple class="form-control scrollbar2" id="seleccionar_Persona1" style="max-width: 100%;">
+                    <option value="" title="No se han encontrado sugerencias">No se han encontrado sugerencias</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group-prepend">
+        <button class="btn dropdown-toggle btn-filtro" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Respuesta</button>
+        <div class="dropdown-menu">
+            <div class="px-1 pt-1">
+                <div class="form-group">
+                    <label for="buscar_Asunto1">Asunto:</label>
+                    <input type="text" class="form-control" name="buscar_Asunto1" id="buscar_Asunto1"
+                        placeholder="Asunto Ejemplo" value="{{filtros.buscar_Asunto1}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group-prepend">
+        <button class="btn dropdown-toggle btn-filtro" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Tipo</button>
+        <div class="dropdown-menu">
+            <div class="px-1 pt-1">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="radio" name="radiosTipo1" id="radioTipo11" value="Ambos" {{#if (isdefined filtros)}}
+                            {{#if (isdefined filtros.radiosTipo1)}}
+                            {{#if_equal filtros.radiosTipo1 "Ambos"}}checked{{/if_equal}}
+                            {{#if_equal filtros.radiosTipo1 ""}}checked{{/if_equal}}
+                            {{else}}checked{{/if}}
+                            {{else}}checked{{/if}}>
+                        <label class="form-check-label" for="radioTipo11">
+                            Ambos
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radiosTipo1" id="radioTipo12" value="Recibidos"
+                            {{#if_equal filtros.radiosTipo1 "Recibidos"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="radioTipo12">
+                            Recibidos
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radiosTipo1" id="radioTipo13" value="Enviados"
+                            {{#if_equal filtros.radiosTipo1 "Enviados"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="radioTipo13">
+                            Enviados
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group-prepend">
+        <button class="btn dropdown-toggle btn-filtro" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Estado</button>
+        <div class="dropdown-menu">
+            <div class="px-1 pt-1">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="radio" name="radiosEstado1" id="radioEstado11" value="Todas"
+                        {{#if (isdefined filtros)}}
+                            {{#if (isdefined filtros.radiosEstado1)}}
+                            {{#if_equal filtros.radiosEstado1 "Todas"}}checked{{/if_equal}}
+                            {{#if_equal filtros.radiosEstado1 ""}}checked{{/if_equal}}
+                            {{else}}checked{{/if}}
+                            {{else}}checked{{/if}}>
+                        <label class="form-check-label" for="radioEstado11">
+                            Todas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radiosEstado1" id="radioEstado12" value="Aceptadas"
+                            {{#if_equal filtros.radiosEstado1 "Aceptadas"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="radioEstado12">
+                            Aceptadas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radiosEstado1" id="radioEstado13" value="Rechazadas"
+                            {{#if_equal filtros.radiosEstado1 "Rechazadas"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="radioEstado13">
+                            Rechazadas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radiosEstado1" id="radioEstado14" value="Sin Revisar"
+                            {{#if_equal filtros.radiosEstado1 "Sin Revisar"}}checked{{/if_equal}}>
+                        <label class="form-check-label" for="radioEstado14">
+                            Sin Revisar
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled>
+    <div class="input-group-append">
+        <button class="btn btn-filtro" type="submit"><i class="fa fa-filter" aria-hidden="true"></i></button>
+    </div>
+</form>

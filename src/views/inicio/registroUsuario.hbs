@@ -1,0 +1,126 @@
+<section id="contact" class="mt-5">
+    <div class="container wow fadeInUp">
+        <div class="section-header">
+            <h3 class="section-title">¡Regístrese!</h3>
+            <p class="section-description">Ingrese al sistema de manejo de peticiones y respuestas con una cuenta e
+                identificacándose como parte de un departamento en una entidad dada.</p>
+        </div>
+    </div>
+    <div class="container wow fadeInUp mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-8">
+                <div class="form">
+                    <form id="signupForm" action="/registro_usuario" method="POST"  autocomplete="off">
+                        <h5 class="text-center">Información Personal / Contacto</h5>
+
+                        <hr>
+
+                        <div class="form-group row">
+                            <label for="nombre" class="col-lg-2 col-form-label text-right">Nombre: </label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+                                    value="{{nombre}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Nombre.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese su nombre completo.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="apellido1" class="col-lg-2 col-form-label text-right">1er Apellido: </label>
+                            <div class="col-lg-10">
+                                <input id="apellido1" type="text" class="form-control" name="apellido1"
+                                    placeholder="Primer Apellido" value="{{apellido1}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Primer Apellido.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese su primer apellido.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="apellido2" class="col-lg-2 col-form-label text-right">2do Apellido: </label>
+                            <div class="col-lg-10">
+                                <input id="apellido2" type="text" class="form-control" name="apellido2" placeholder="Segundo Apellido"
+                                    value="{{apellido2}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Segundo Apellido.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese su segundo apellido.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telefono" class="col-lg-2 col-form-label text-right">Teléfono: </label>
+                            <div class="col-lg-10">
+                                <input type="tel" class="form-control" id="telefono" name="telefono"
+                                    pattern="[0-9]{4}-[0-9]{4}" placeholder="Teléfono" value="{{telefono}}"
+                                    autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Teléfono.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese un teléfono que siga la estructura ####-####.
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <h5 class="text-center">Usuario del Sistema</h5>
+
+                        <hr>
+
+                        <div class="form-group row">
+                            <label for="correo" class="col-lg-2 col-form-label text-right">Correo: </label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo"
+                                    value="{{correo}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Correo.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una dirección de correo electrónico única en el sistema.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="contrasena" class="col-lg-2 col-form-label text-right">Contraseña: </label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" minlength="6" value="{{password}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Contraseña.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese una contraseña que tenga más de 6 caracteres.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="confirma_contrasena" class="col-lg-2 col-form-label text-right">Confirme Contraseña: </label>
+                            <div class="col-lg-10 my-auto">
+                                <input type="password" class="form-control" id="confirma_contrasena" name="confirma_contrasena" placeholder="Confirmar Contraseña" minlength="6" value="{{password}}" autocomplete="off" required>
+                                <div class="valid-feedback">
+                                    Confirmación de Contraseña.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Ingrese la misma contraseña que seleccionó.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="text-center"><i class="fa fa-check"></i>Al presionar el boton <i>Registrarse</i> está aceptando los <a href="/terminos_condiciones">Terminos y Condiciones</a>.</p>
+                            <br>
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

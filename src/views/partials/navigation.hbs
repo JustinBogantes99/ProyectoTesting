@@ -1,0 +1,133 @@
+<header id="header" style="z-index: 99;">
+     <div class="container">
+          <div id="logo" class="pull-left">
+               <h1>
+                    <a {{#if user}}href="/inicio" {{else}}href="/#hero" {{/if}}>RequesTec</a>
+               </h1>
+          </div>
+          <nav id="nav-menu-container">
+               {{#if user}}
+               <input type="hidden" id="idPersonaNotificacion" value="{{user.id}}">
+               <ul class="nav-menu">
+                    <li class="nav-item dropdown d-none d-md-none d-lg-block">
+                         <a class="nav-link text-light unselectable" data-toggle="dropdown">
+                              <i class="fa fa-bell">
+                                   <p id="activarNotificacion"></p>
+                              </i> <i class="fa fa-angle-down"></i>
+                         </a>
+                         <div class="dropdown-menu border-dark collapseMemos">
+                              <!-- carusel -->
+                              <div id="carouselExampleIndicators" class="carousel notification-box"
+                                   data-interval="false" data-ride="carousel">
+                                   <div class="controls-top">
+                                        <div class="row">
+                                             <div class="col-lg-3 col-lg-3 col-3 my-auto bg-dark">
+                                                  <a class="text-light btn btn-block greenLi pt-2"
+                                                       data-target="#carouselExampleIndicators" data-slide-to="0"
+                                                       title="Peticiones"><i class="fa fa-envelope-o"></i></a>
+                                             </div>
+                                             <div class="col-lg-3 col-lg-3 col-3 my-auto bg-dark">
+                                                  <a class="text-light btn btn-block greenLi pt-2"
+                                                       data-target="#carouselExampleIndicators" data-slide-to="1"
+                                                       title="Respuestas"><i class="fa fa-reply"></i></a>
+                                             </div>
+                                             <div class="col-lg-3 col-lg-3 col-3 my-auto bg-dark">
+                                                  <a class="text-light btn btn-block greenLi pt-2"
+                                                       data-target="#carouselExampleIndicators" data-slide-to="2"
+                                                       title="Modificaciones"><i class="fa fa-pencil-square-o"></i></a>
+                                             </div>
+                                             <div class="col-lg-3 col-lg-3 col-3 my-auto bg-dark">
+                                                  <a class="text-light btn btn-block greenLi pt-2"
+                                                       data-target="#carouselExampleIndicators" data-slide-to="3"
+                                                       title="Fechas limite"><i class="fa fa-calendar"></i></a>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="carousel-inner scrollbar" id="notificacionPadre">
+                                        <input type="hidden" value="{{user.id}}" id="idUsuarioNotificacion">
+                                        <div class="carousel-item active" id="notificacionPeticionId">
+                                             {{#each user.notificacionPeticion}}
+                                             <a href="{{enlace}}"
+                                                  class="greenStatement btn btn-block multiline text-left greenLi pt-2 notificacionPeticion {{#if leido}} leido {{else}} noLeido {{/if}}"
+                                                  id="{{_id}}"> {{asunto}} -</a>
+                                             <br>
+                                             <script>formatDate("{{_id}}", "{{createdAt}}")</script>
+                                             {{/each}}
+                                        </div>
+                                        <div class="carousel-item" id="notificacionRespuestaId">
+                                             {{#each user.notificacionRespuesta}}
+                                             <a href="{{enlace}}"
+                                                  class="greenStatement btn btn-block multiline text-left greenLi pt-2 notificacionRespuesta {{#if leido}} leido {{else}} noLeido {{/if}}"
+                                                  id="{{_id}}"> {{asunto}} -</a>
+                                             <br>
+                                             <script>formatDate("{{_id}}", "{{createdAt}}")</script>
+                                             {{/each}}
+                                        </div>
+                                        <div class="carousel-item" id="notificacionModificacionId">
+                                             {{#each user.notificacionModificacion}}
+                                             <a href="{{enlace}}"
+                                                  class="greenStatement btn btn-block multiline text-left greenLi pt-2 notificacionModificacion {{#if leido}} leido {{else}} noLeido {{/if}}"
+                                                  id="{{_id}}"> {{asunto}} -</a>
+                                             <br>
+                                             <script>formatDate("{{_id}}", "{{createdAt}}")</script>
+                                             {{/each}}
+                                        </div>
+                                        <div class="carousel-item" id="notificacionFechaId">
+                                             {{#each user.notificacionFecha}}
+                                             <a href="{{enlace}}"
+                                                  class="greenStatement btn btn-block multiline text-left greenLi pt-2 notificacionFecha {{#if leido}} leido {{else}} noLeido {{/if}}"
+                                                  id="{{_id}}"> {{asunto}} -</a>
+                                             <br>
+                                             <script>formatDate("{{_id}}", "{{createdAt}}")</script>
+                                             {{/each}}
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </li>
+                    <li class="menu-has-children">
+                         <a class="unselectable">Funciones</a>
+                         <ul>
+                              <li><a class="unselectable" href="/inicio/bandeja">Acceder a las bandejas</a></li>
+                              <li><a class="unselectable" href="/inicio/formular_peticion">Crear una petición</a></li>
+                              <li class="dropdown-submenu">
+                                   <a href="#" class="unselectable" aria-haspopup="true" aria-expanded="false"> <span
+                                             class="nav-label">Administración</span><span class="caret"></span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="/crear_token">Crear Departamento</a></li>
+                                   </ul>
+                              </li>
+                         </ul>
+                    </li>
+                    <li class="menu-has-children">
+                         <a class="unselectable">Contacto</a>
+                         <ul>
+                              <li><a class="unselectable" href="/terminos_condiciones">Privacidad</a></li>
+                         </ul>
+                    </li>
+                    <li class="menu-has-children">
+                         <a class="unselectable">{{user.nombre}}</a>
+                         <ul>
+                              <li><a class="unselectable" href="/inicio/perfil">Perfil</a></li>
+                              <li><a class="unselectable" href="/cerrar_sesion">Cerrar Sesión</a></li>
+                         </ul>
+                    </li>
+               </ul>
+               <script src="/js/socket/notificacion.js"></script>
+               {{else}}
+               <ul class="nav-menu">
+                    <li class="menu-active"><a class="unselectable" href="/#hero" style="color: #fff;">Inicio</a></li>
+                    <li><a class="unselectable" href="/#about" style="color: #fff;">Acerca de</a></li>
+                    <li><a class="unselectable" href="/#services" style="color: #fff;">Servicios</a></li>
+                    <li class="menu-has-children">
+                         <a class="unselectable">Ingreso</a>
+                         <ul>
+                              <li><a class="unselectable" href="/inicio_sesion">Inicie Sesión</a></li>
+                              <li><a class="unselectable" href="/registro_usuario">Regístrese</a></li>
+                         </ul>
+                    </li>
+               </ul>
+               {{/if}}
+          </nav>
+     </div>
+</header>

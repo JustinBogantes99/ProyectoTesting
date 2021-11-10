@@ -1,0 +1,181 @@
+{{#if (isdefined esAdministrador)}}
+{{#if esAdministrador}}
+
+<div id="mySidebar" class="sidebar">
+    <div class="container">
+
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Añadir Espectador
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body pt-1">
+                        <div class="px-1 mt-0">
+                            <div class="form-group mt-0 mb-0">
+                                <label for="buscar_NombrePersona">Nombre:</label>
+                                <input type="text" class="form-control" name="buscar_NombrePersona"
+                                    id="buscar_NombrePersona" placeholder="Nombre Apellidos" value="">
+                            </div>
+                            <div class="form-group mt-0 mb-0">
+                                <label for="buscar_CorreoPersona">Correo:</label>
+                                <input type="text" class="form-control" name="buscar_CorreoPersona"
+                                    id="buscar_CorreoPersona" placeholder="email@ejemplo.com" value="">
+                            </div>
+                            <div class="form-group mt-0 mb-0">
+                                <label for="seleccionar_Persona">Seleccione un usuario:</label>
+                                <select multiple class="form-control  mb-1" id="seleccionar_Persona">
+                                    <option value="-1" title="No se han encontrado sugerencias">
+                                        No se han encontrado usuarios
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            Ver Espectadores
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body mt-0 mb-0 pt-1 pb-1">
+                        <div class="row justify-content-center">
+                            <table class="table table-condensed table-striped">
+                                <tbody id="espectadoresActuales">
+                                    {{#if (isdefined espectadores)}}
+                                    {{#each espectadores}}
+                                    <tr class="d-flex" id="tr-{{id}}&{{../codigoPeticion}}">
+                                        <td class="col-10 text-center">{{nombre}} {{apellido1}} {{apellido2}} -
+                                            {{correo}}</td>
+                                        <td class="col-2 text-center my-auto bg-light">
+                                            <a href="" class="eliminarEspectador" id="{{id}}&{{../codigoPeticion}}">
+                                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {{else}}
+                                    <tr class="d-flex" id="noespectadores">
+                                        <td class="col-10">No se encontraron espectadores</td>
+                                        <td class="col-2"><a href="#" data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne"><i
+                                                    class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                    {{else}}
+                                    <tr class="d-flex" id="noespectadores">
+                                        <td class="col-10">No se encontraron espectadores</td>
+                                        <td class="col-2"><a href="#" data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne"><i
+                                                    class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    {{/if}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/if}}
+
+<div id="main">
+    <section id="contact" class="mt-5">
+        <div class="container mb-4">
+            <div class="section-header">
+                <h3 class="section-title">
+                    Familia de peticiones: {{codigoPeticion}}
+                </h3>
+            </div>
+        </div>
+        <br>
+        <div class="container mb-4">
+            <div class="container">
+                <div id="accordion">
+                    {{#if (isdefined peticionesOrden)}}
+                    <div class="card border-0 bg-transparent" style="padding-right: 0px;" class="invisible">
+                        {{#each peticionesOrden}}
+                        <a href="{{enlace}}">
+                            <div class="row mb-3">
+                                <div class="">
+                                    {{{tab}}}
+                                </div>
+                                <div class="card-header col" id="IdUnico0">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="btn btn-link">{{asunto}}</span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="btn">De: {{remitente}}</span>
+                                            <span class="btn">Para: {{destinatario}}</span>
+                                        </div>
+                                        <div class="col align-self-center">
+                                            <span>
+                                                {{{respuesta}}}
+                                            </span>
+                                        </div>
+                                        <div class="col m-auto">
+                                            <span class="btn">Fecha Límite: {{fechaLimite}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {{/each}}
+                        {{else}}
+
+                        <div class="jumbotron">
+                            <h1>No hay nada que mostrar</h1>
+                        </div>
+
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{#if (isdefined esAdministrador)}}
+        {{#if esAdministrador}}
+        <div class="d-flex justify-content-center mt-0">
+            <button class="btn btn-primary" onclick="openNav()" value="0" id="estado">Permisos de visualización</button>
+        </div>
+        {{/if}}
+        {{/if}}
+    </section>
+</div>
+
+
+<script>
+    function openNav() {
+        var estado = document.getElementById("estado").value;
+        if (estado == 0) {
+            document.getElementById("mySidebar").style.width = "375px";
+            document.getElementById("main").style.marginRight = "375px";
+            document.getElementById("estado").value = 1;
+        } else {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginRight = "0";
+            document.getElementById("estado").value = 0;
+        }
+    }
+</script>
+
+{{>historial/modal_agregar}}
+

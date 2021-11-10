@@ -1,0 +1,167 @@
+<section id="contact" class="mt-5">
+    <div class="container mb-4">
+        <div class="section-header">
+            <h3 class="section-title">Detalle de la respuesta</h3>
+        </div>
+    </div>
+    {{#if respuesta}}
+    <div class="container col-lg-7 col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text"><strong>Asunto: </strong>{{respuesta.asunto}}</p>
+                <hr>
+                {{#if respuesta.aceptado.tipo}}
+                <strong style="color:lime">Respuesta Aceptada</strong>
+                <hr>
+                {{else}}
+                {{#if_not_equal razon ""}}
+                <strong style="color:crimson">Respuesta Rechazada</strong>
+                <textarea name="razon" id="idRazon" class="form-control vistaBI" disabled>
+                    {{razon}}
+                </textarea>
+                <hr>
+                {{/if_not_equal}}
+                {{/if}}
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <p class="card-text">
+                            <strong>De:</strong> {{respuesta.remitenteNombre}} ({{respuesta.remitenteCorreo}})
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <p class="card-text">
+                            <strong>Para:</strong> {{respuesta.destinatarioNombre}} ({{respuesta.destinatarioCorreo}})
+                        </p>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <strong>Fecha de Creación:</strong>
+                        <p class="card-text">{{respuesta.fechaInicio}}</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <strong>Fecha de Actualización:</strong>
+                        <p class="card-text">{{respuesta.fechaActualizacion}}</p>
+                    </div>
+                </div>
+                <hr>
+                <strong>Descripción:</strong>
+                <textarea name="descripcion" id="idDescripcion" class="form-control vistaBI" disabled>
+                    {{respuesta.descripcion}}
+                </textarea>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Documentos adjuntos:</strong>
+                    {{#if files}}
+                    A continuación puede observar los archivos asociados a la petición.
+                    {{else}}
+                    No hay archivos asociados a la petición.
+                    {{/if}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row justify-content-md-center row-eq-height">
+                {{#each files}}
+                <div class="col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body h-100">
+                            {{#if esImagen}}
+                            <img class="card-img-top" src="/imagen/{{filename}}" alt="Card image cap">
+                            {{/if}}
+                            <p class="card-title">{{originalname}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <form method="GET" action="/descargar/{{filename}}">
+                                <button class="btn btn-primary btn-block"><i class="fa fa-download"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <a class="btn btn-block greenColor" href="/inicio/mostrar_peticion/{{respuesta.peticionOrigen}}">Ver
+                    petición origen</a>
+            </div>
+            {{#if_equal user.id respuesta.remitente}}
+            {{#if respuesta.aceptado.tipo}}
+            {{else}}
+            {{#if respuesta.aceptado.revisado}}
+            <div class="col-lg-4">
+                <a href="/inicio/modificar_respuesta/{{respuesta.id}}" class="btn btn-block greenColor">Modificar
+                    esta respuesta</a>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/if_equal}}
+        </div>
+
+        {{#if_equal user.id respuesta.destinatario}}
+        {{#if respuesta.aceptado.tipo}}
+        {{else}}
+        {{#if respuesta.aceptado.revisado}}
+        {{else}}
+        <hr>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-4">
+                <form id="repuestaAceptada" action="/inicio/aceptar_respuesta" method="POST">
+                    <input type="hidden" name="idRespuesta" value="{{respuesta.id}}">
+                    <button id="btnSubmit" type="submit" class="btn btn-success btn-block">Aceptar</button>
+                </form>
+            </div>
+            <div class="col col-lg-4">
+                <button class="btn btn-danger btn-block" type="button" data-toggle="collapse"
+                    data-target="#expandir_rechazo" aria-expanded="false"
+                    aria-controls="expandir_rechazo">Rechazar</button>
+            </div>
+        </div>
+        <br>
+        <div class="collapse" id="expandir_rechazo">
+            <h5 class="text-center">¿Por qué rechazó la respuesta?</h5>
+            <hr>
+            <form id="repuestaRechazada" action="/inicio/rechazar_respuesta" method="POST">
+                <input type="hidden" name="idRespuesta" value="{{respuesta.id}}">
+                <div class="form-group row">
+                    <label for="idRazon" class="col-lg-2 col-form-label text-center">Razón:</label>
+                    <div class="col-lg-10">
+                        <textarea name="Razon" id="idRazón" class="form-control textBI" placeholder="Razón"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Razón.
+                        </div>
+                        <div class="invalid-feedback">
+                            Ingrese una razón del rechazó de la respuesta.
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-4">
+                        <button id="btnSubmit" type="submit" class="btn btn-danger btn-block">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {{/if}}
+
+        {{/if}}
+        {{/if_equal}}
+
+    </div>
+</section>
+{{else}}
+<div class="container text-center">
+    <h3>No hay respuesta que mostrar.</h3>
+    <a href="/inicio/bandeja" class="btn greenColor text-center">Ir a la sección de bandejas.</a>
+</div>
+</section>
+{{/if}}

@@ -1,0 +1,177 @@
+<section id="contact" class="mt-5">
+    <div class="container wow fadeInUp">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-5 mx-3">
+                    <div class="card-header">
+                        <h3>Identificación</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="m-auto col-lg-4 col-form-label" for="email">
+                                <h5>Email</h5>
+                            </label>
+                            <div class="m-auto col-lg-8">
+                                <input id="email" type="email" class="form-control" name="email" value="{{user.email}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <form action="/show_profile/nombre?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="nombre">
+                                    <h5>Nombre</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input id="nombre" type="text" class="form-control" name="nombre"
+                                        value="{{user.nombre}}">
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/show_profile/apellido1?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="apellido1">
+                                    <h5>1<sup>er</sup> Apellido</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input id="apellido1" type="text" class="form-control" name="apellido1"
+                                        value="{{user.apellido1}}">
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/show_profile/apellido2?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="apellido2">
+                                    <h5>2<sup>do</sup> Apellido</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input id="apellido2" type="text" class="form-control" name="apellido2"
+                                        value="{{user.apellido2}}">
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/show_profile/fecha_nacimiento?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="fecha_nacimiento">
+                                    <h5>Nacimiento</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input type="text" id="datepicker" name="fecha_nacimiento" class="datepicker-here form-control readonly" data-language='en'
+                                        placeholder="Fecha de Nacimiento" value="{{fecha_nacimiento_info}}" readonly />
+                                    <script>
+                                        $('#datepicker').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'yyyy-mm-dd'
+                                        });
+                                    </script>
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-5 mx-3">
+                    <div class="card-header">
+                        <h3>Contacto</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/show_profile/direccion?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="direccion">
+                                    <h5>Dirección</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <textarea id="direccion" type="text" class="form-control"
+                                        name="direccion">{{user.direccion}}</textarea>
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/show_profile/telefono?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="telefono">
+                                    <h5>Telefono</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input id="telefono" type="text" class="form-control" pattern="[0-9]{4}-[0-9]{4}"
+                                        name="telefono" value="{{user.telefono}}">
+                                    <small id="telefonoayuda" class="form-text text-muted">Siga el formato
+                                        '####-####'</small>
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-5 mx-3">
+                    <div class="card-header">
+                        <h3>Contraseña</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/show_profile/password?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="prevPassword">
+                                    <h5>Anterior Contraseña</h5>
+                                </label>
+                                <div class="m-auto col-lg-8">
+                                    <input id="prevPassword" type="password" class="form-control" name="prevPassword" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="password">
+                                    <h5>Contraseña</h5>
+                                </label>
+                                <div class="m-auto col-lg-8">
+                                    <input id="password" type="password" class="form-control" name="password1" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="m-auto col-lg-4 col-form-label" for="confirm_password">
+                                    <h5>Confirmar</h5>
+                                </label>
+                                <div class="m-auto col-lg-6">
+                                    <input id="confirm_password" type="password" class="form-control"
+                                        name="confirm_password" />
+                                </div>
+                                <div class="m-auto col-lg-2">
+                                    <button class="btn btn-outline-primary btn-block" type="submit"><i
+                                            class="fa fa-pencil"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
