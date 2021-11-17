@@ -25,5 +25,15 @@ export class passport {
         return encontrado + autenticado;
     }
 
+    deserializeUser(id:String){
+        var encontrado = 0;
+        this.personas.forEach(persona => {
+            if (persona.correo == id){
+                encontrado = 1;
+            }
+        })
+        return encontrado;
+    }
+
 
 }

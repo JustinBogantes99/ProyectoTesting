@@ -1,44 +1,28 @@
 import { passport } from './DoblesPruebas/Fake/fake-passport.spect';
-describe('Permitir a los usuarios regsitrarse en la aplicación - passport.use  en Controlador.js', () => {
+describe('Permitir a los usuarios regsitrarse en la aplicación - passport.deserializeUser en passport.js', () => {
 
 
-    it(`Proceso de passport.use con los datos correctos`, () => {
+    it(`Proceso de passport.deserializeUser con los datos correctos`, () => {
                 
         //Simulando variables que vienen por parametros
-        var usernameField = 'alfredo@gmail.com';
-        var passwordField = '12345';
+        var id = 'alfredo@gmail.com';
 
         const pass = new passport();
 
-        //Procesos de use
-        expect(pass.use(usernameField, passwordField)).toEqual(2);
+        //Procesos de deserializeUser
+        expect(pass.deserializeUser(id)).toEqual(1);
     });
 
 
-    it(`Proceso de passport.use con contraseña incorrecta`, () => {
+    it(`Proceso de passport.deserializeUser con los datos incorrectos`, () => {
                 
         //Simulando variables que vienen por parametros
-        var usernameField = 'alfredo@gmail.com';
-        var passwordField = '123';
+        var id = 'prueba@gmail.com';
 
         const pass = new passport();
 
-        //Procesos de use
-        expect(pass.use(usernameField, passwordField)).toEqual(1);
+        //Procesos de deserializeUser
+        expect(pass.deserializeUser(id)).toEqual(0);
     });
-
-
-    it(`Proceso de passport.use con usuario incorrecto`, () => {
-                
-        //Simulando variables que vienen por parametros
-        var usernameField = 'prueba@gmail.com';
-        var passwordField = '12345678';
-
-        const pass = new passport();
-
-        //Procesos de use
-        expect(pass.use(usernameField, passwordField)).toEqual(0);
-    });
-
 
 });
