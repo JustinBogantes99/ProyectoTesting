@@ -177,6 +177,7 @@ daoPeticion.registrarPeticion = async (data, req) => {
         let registro = { idPersona: data.remitente, codigoPeticion: data.codigo, titulo: "Administrador" };
         daoPeticion.darPermisos(registro);
     });
+    
 }
 
 module.exports = daoPeticion; 
