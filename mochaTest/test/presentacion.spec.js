@@ -84,6 +84,19 @@ describe('Presentar respuestas: ', ()=>{
         });
         done();
     });
+    it('rechazar respuesta', (done) => {
+        let u = chai.request(url)
+        .post('/inicio_sesion')
+        .send({correoInicio:'prueba2@gmail.com',contrasenaInicio: 'aA1234'})
+        .then( function(err,res){
+            u.post('http://localhost:3000/inicio/rechazar_respuesta')
+            .send({idRespuesta: '6196b3d413ac451a50812c84'})
+            .end(function(err, res) {
+                expect(document).querySelector('modal-body text-center').to.have.text('Se ha aceptado la respuesta correctamente');
+            });
+        });
+        done();
+    });
 
 });
 

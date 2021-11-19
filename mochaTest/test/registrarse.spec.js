@@ -11,7 +11,7 @@ describe('Iniciar sesion: ', ()=>{
         .post('/inicio_sesion')
         .send({correoInicio:'prueba@gmail.com',contrasenaInicio: 'aA1234'})
         .end( function(err,res){
-            expect(res).to.redirectTo('http://localhost:3000/inicio');
+            expect(res).to.redirect;
             done();
         });
     });
