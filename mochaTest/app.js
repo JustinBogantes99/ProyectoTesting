@@ -68,5 +68,35 @@ module.exports = {
         }
     
         return { personaObjetivo, dePara, privilegios};
+    },
+    
+    registrarPeticion: async (data, req) => {
+        let destinatarioCompleto = await daoPersona.obtenerUnaPersonaPorMultiples({
+            correo: data.destinatarioCorreo
+        });
+    
+        data.destinatario = destinatarioCompleto._id;
+        delete data.destinatarioCorreo;
+        data.codigo = await obtenerCodigo(CPD);
+        data.estado = "Activo";
+        data.nivel = 0;
+        const nuevaPeticion = new Peticion(data);
+    
+        await nuevaPeticion.save(function (err, peticion) {
+            idPeticion = peticion._id;
+            for (const archivo of req.files) {
+                let idArchivo = archivo.id;
+                let nombreArchivo = archivo.originalname;
+                let idMedio = idPeticion;
+                let tipoMedio = "Peticion";
+                let registroAdjunto = new Adjunto({ idArchivo, nombreArchivo, idMedio, tipoMedio });
+                registroAdjunto.save();
+            }
+    
+            construirCorreo({ persona: [req.user, destinatarioCompleto], mensaje: 'Nueva_Peticion', tipo: 'Peticion', idPeticion, asuntoPrimario: data.asunto, req });
+    
+            let registro = { idPersona: data.remitente, codigoPeticion: data.codigo, titulo: "Administrador" };
+            daoPeticion.darPermisos(registro);
+        });
     }
 }

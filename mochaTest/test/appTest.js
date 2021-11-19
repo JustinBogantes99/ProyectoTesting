@@ -38,7 +38,7 @@ describe('App',function(){
     })
     describe('obtenerSujeto',function(){
         it('Todos los datos correctos', function(){
-            var mensaje = {destinatario:'1',remitente:''}
+            var mensaje = { destinatario:'1',remitente:'1' }
             var result = funciones.obtenerSujeto(mensaje,"Consulta","1");
             assert.equal(result,1);
 
@@ -63,19 +63,21 @@ describe('App',function(){
             assert.equal(result,true);
         })
         it('Datos incorrectos', function(){
-            var result = funciones.verificarRespuesta("","")
+            var result = funciones.verificarRespuesta("5f32c7c131aed1001711b5798","4")
             assert.equal(result,true);
         })
         it('Usuario incorrecto', function(){
-            var result = funciones.verificarRespuesta("","")
+            var result = funciones.verificarRespuesta("5f32c7c131aed1001711b579","3")
             assert.equal(result,true);
         })
         it('Peticion incorrecto', function(){
             var mensaje = {destinatario:'1',remitente:''}
-            var result = funciones.verificarRespuesta("","")
+            var result = funciones.verificarRespuesta("5f32c7c131aed1001711b5788","1")
             assert.equal(result,true);
         })
     })
+
+    
     describe('enviarNotificacion',function(){
         it('Todos los datos correctos', function(){
             const data = { 
@@ -108,5 +110,6 @@ describe('App',function(){
             assert.equal(result.resultado,0);
         })
     })
+
 })
 

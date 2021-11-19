@@ -12,13 +12,14 @@ let limitePorPantalla = 1;  //Cantidad de indices en la paginacion
 module.exports = {
     
     obtenerSujeto:function (mensaje, bandeja, idUsuario) {
+        
     let dePara, busqueda, personaObjetivo, privilegios;
-    const valor=0;
+    let valor = 0;
     if (bandeja.includes("Consulta")) {
         if (mensaje.destinatario == idUsuario) {
             busqueda = mensaje.remitente;
             dePara = "De:";
-            valor=1
+            valor = 1
             
         }
         else {
@@ -42,7 +43,6 @@ module.exports = {
 
     personaObjetivo = {nombre:'Justin',apellido1:'Bogantes',apellido2:'Rodriguez', telefono:'8888888',correo:'justin@gmail.com',contrasena:'1234',
     departamento:'Computacion', token:'', fechaFinToken:'07/09/2021', notificacionPeticion: '', notificacionRespuesta:'', notificacionModificacion:'',notificacionFecha:''}
-    
     if(mensaje.destinatario != idUsuario && mensaje.remitente != idUsuario){
         privilegios = false;
     }

@@ -4,7 +4,6 @@ module.exports = {
 
     enviarNotificacion: function (data) {
     const usuarioNotificar = data.idUsuarioNotificar;
-    console.log(usuarioNotificar)
     let actualizacion; 
     let tipoNotificacion;
     nuevaNotificacion = {
